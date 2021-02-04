@@ -45,8 +45,56 @@ namespace SistemaDePagamento
 
         public static void Comprar()
         {
+            Console.WriteLine("Qual produto deseja comprar: ");
+            Console.WriteLine("1 - TELEVISÃO | 2 - GELADEIRA");
+            var opcaoProduto = int.Parse(Console.ReadLine());
+
+            switch (opcaoProduto)
+            {
+                case 1:
+                    CompraTelevisao();
+                    break;
+                case 2:
+                    CompraGeladeira();
+                    break;
+
+            }
+
+             static void CompraTelevisao()
+            {
+                var valorTV = 2000;
+                var televisao = new Produto(valorTV);
+                televisao.DescontoTelevisao();
+
+                Console.WriteLine("==== PRODUTO: TELEVISÃO ====");
+
+                Console.WriteLine($"Valor da Televisão: R${valorTV}");
+                Console.WriteLine($"Valor com desconto de 15%: R${televisao.Valor}");
+                Console.WriteLine("=======================================");
+
+
+            }
+
+            static void CompraGeladeira()
+            {
+                var valorGeladeira = 2000;
+                var geladeira = new Produto(valorGeladeira);
+                geladeira.DescontoGeladeira();
+
+                Console.WriteLine("==== PRODUTO: GELADEIRA ====");
+
+                Console.WriteLine($"Valor da Geladeira: R${valorGeladeira}");
+                Console.WriteLine($"Valor com desconto de 15% + bônus de R$100: R${geladeira.Valor}");
+                Console.WriteLine("=======================================");
+                Console.WriteLine("\n");
+
+
+
+            }
+
             Console.WriteLine("Qual será a forma de pagamento: ");
             Console.WriteLine("1 - DINHEIRO | 2 - BOLETO");
+            Console.WriteLine("\n");
 
             var opcao = int.Parse(Console.ReadLine());
 
@@ -60,8 +108,11 @@ namespace SistemaDePagamento
                     break;
 
             }
+
         }
-        public static void PgtoDinheiro()
+
+
+    public static void PgtoDinheiro()
         {
             Console.WriteLine("Digite o valor da compra:");
             var valor = int.Parse(Console.ReadLine());
@@ -89,14 +140,17 @@ namespace SistemaDePagamento
             }
             else
             {
-                Console.WriteLine($"\n - Valor da compra: R${valor}. \n - Valor com Desconto: {dinheiro.Valor}\n" +
+                Console.WriteLine($"\n - Valor da compra: R${valor}. \n - Valor com Desconto de 5% - Pagamento em dinheiro : {dinheiro.Valor}\n" +
                     $" - Pagamento recebido: R${valorRecebido}.\n - Troco: R${troco}");
                 Console.WriteLine("\n");
 
                 
                 dinheiro.pgtoDinheiroConfirmado();
                 Console.WriteLine($"Compra finalizada com sucesso no valor de R${dinheiro.Valor}");
+               
+
                 Console.WriteLine("\n");
+
                 listaDinheiro.Add(dinheiro);
 
             }
